@@ -1,1 +1,20 @@
-{"_id": "3003c80ff73e-Aditya-Victus", "name": "Aditya", "count": 7}
+{
+    "_id": "3003c80ff73e-Aditya-Victus",
+    "name": "Aditya-Victus",
+    "userDefinedControls": {
+        "index": [
+            "explorer.exe",
+            "ms-settings:"
+        ],
+        "index and middle": [
+            "calc.exe"
+        ],
+        "index, middle and ring": [
+            "write.exe"
+        ],
+        "index, middle, ring and little": [
+            "notepad.exe"
+        ],
+        "thumb": "null"
+    }
+}

@@ -9,7 +9,7 @@ frame_1 = customtkinter.CTkFrame(app)
 frame_2 = customtkinter.CTkFrame(app)
 
 # Load the GIF
-gif_file = "your_gif_file.gif"  # Replace with the path to your GIF file
+gif_file = "another_gif.gif"  # Replace with the path to your GIF file
 gif = Image.open(gif_file)
 frames = []
 
