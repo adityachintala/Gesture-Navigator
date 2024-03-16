@@ -1,4 +1,5 @@
 import customtkinter
+import subprocess
 
 app = customtkinter.CTk()
 app.title("Gesture Navigator")
@@ -14,6 +15,11 @@ def goToCustomise():
     menuFrame.pack_forget()
     customiseFrame.pack(fill="both", expand=True)
 
+# Function to run python script
+def goToExecuteProgram(filePath):
+    print("Starting Program")
+    subprocess.run(["python", filePath])
+
 # Function to switch back to the first screen
 def backToMenuFrame():
     customiseFrame.pack_forget()
@@ -25,7 +31,7 @@ def print_hello_world():
 
 # First screen
 menuFrame.pack(fill="both", expand=True)
-button_1 = customtkinter.CTkButton(menuFrame, text="Launch program", command=goToCustomise)
+button_1 = customtkinter.CTkButton(menuFrame, text="Launch program", command=lambda:goToExecuteProgram("new.py"))
 button_1.pack(pady=20)
 button_1 = customtkinter.CTkButton(menuFrame, text="Customise gestures", command=goToCustomise)
 button_1.pack(pady=20)
