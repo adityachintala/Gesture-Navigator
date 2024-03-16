@@ -1,5 +1,6 @@
 import customtkinter
 import subprocess
+import json
 
 app = customtkinter.CTk()
 app.title("Gesture Navigator")
@@ -9,6 +10,17 @@ app.iconbitmap("dark.ico")
 # Create two frames for the screens
 menuFrame = customtkinter.CTkFrame(app)
 customiseFrame = customtkinter.CTkFrame(app)
+
+def getAppNames():
+    # read a file appList.json and fetch names
+    # return the list of app names
+    f = open("appList.json", "r")
+    data = json.load(f)
+    ls = []
+    for i in data:
+        ls.append(i["displayName"])
+    return ls
+
 
 # Function to switch to the second screen
 def goToCustomise():
@@ -26,8 +38,8 @@ def backToMenuFrame():
     menuFrame.pack(fill="both", expand=True)
 
 # Function to print "Hello, World!"
-def print_hello_world():
-    print("Hello, World!")
+def print_hello_world(varName):
+    print("Hello, World!", varName.get())
 
 # First screen
 menuFrame.pack(fill="both", expand=True)
@@ -37,9 +49,19 @@ button_1 = customtkinter.CTkButton(menuFrame, text="Customise gestures", command
 button_1.pack(pady=20)
 
 # Second screen
-button_2 = customtkinter.CTkButton(customiseFrame, text="Back to Screen 1", command=backToMenuFrame)
-button_2.pack(pady=20)
-button_3 = customtkinter.CTkButton(customiseFrame, text="Print Hello, World!", command=print_hello_world)
-button_3.pack(pady=20)
+customiseDesc = customtkinter.CTkLabel(customiseFrame, text="Customise your gestures here")
+customiseDesc.pack(pady=5)
+customiseDesc2 = customtkinter.CTkLabel(customiseFrame, text="You have five available gestures to customise which can launch an app from the given list of apps.")
+customiseDesc2.pack(pady=5)
+
+# Five drop down lists should be there
+
+# Gesture 1
+gesture1 = customtkinter.CTkLabel(customiseFrame, text="Gesture 1")
+gesture1Text = customtkinter.StringVar(value="option 2")  # set initial value
+gesture1.pack(pady=20)
+gesture1_dropdown = customtkinter.CTkComboBox(customiseFrame, values=getAppNames(),command=print_hello_world(gesture1Text), variable=gesture1Text)
+gesture1_dropdown.pack(pady=20)
+
 
 app.mainloop()
