@@ -57,11 +57,26 @@ customiseDesc2.pack(pady=5)
 # Five drop down lists should be there
 
 # Gesture 1
-gesture1 = customtkinter.CTkLabel(customiseFrame, text="Gesture 1")
-gesture1Text = customtkinter.StringVar(value="option 2")  # set initial value
-gesture1.pack(pady=20)
-gesture1_dropdown = customtkinter.CTkComboBox(customiseFrame, values=getAppNames(), variable=gesture1Text)
-gesture1_dropdown.pack(pady=20)
+gesture_dropdown_frame = customtkinter.CTkFrame(customiseFrame)
+gesture_dropdown_frame.pack(fill="both", expand=True)
+
+gesture1 = customtkinter.CTkLabel(gesture_dropdown_frame, text="Gesture 1")
+gesture1.pack(side="left", pady=10, padx=10)
+
+gesture1_dropdown = customtkinter.CTkComboBox(gesture_dropdown_frame, values=getAppNames())
+gesture1_dropdown.pack(side="left", pady=30, padx=30)
+
+gesture_dropdown_frame.place(relx=0.5, rely=0.5, anchor="center")
+
+# Gesture 2
+
+gesture2 = customtkinter.CTkLabel(gesture_dropdown_frame, text="Gesture 2")
+gesture2.pack(side="left", pady=10, padx=10)
+
+gesture2_dropdown = customtkinter.CTkComboBox(gesture_dropdown_frame, values=getAppNames())
+gesture2_dropdown.pack(side="left", pady=30, padx=30)
+
+gesture_dropdown_frame.place(relx=0.5, rely=0.5, anchor="center")
 
 
 app.mainloop()
