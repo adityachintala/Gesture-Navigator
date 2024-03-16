@@ -51,32 +51,68 @@ customiseButton.pack(pady=20)
 # Second screen
 customiseDesc = customtkinter.CTkLabel(customiseFrame, text="Customise your gestures here")
 customiseDesc.pack(pady=5)
-customiseDesc2 = customtkinter.CTkLabel(customiseFrame, text="You have five available gestures to customise which can launch an app from the given list of apps.")
+customiseDesc2 = customtkinter.CTkLabel(customiseFrame, text="You have five available gestures to customise which\ncan launch an app from the given list of apps.")
 customiseDesc2.pack(pady=5)
 
 # Five drop down lists should be there
 
 # Gesture 1
-gesture_dropdown_frame = customtkinter.CTkFrame(customiseFrame)
-gesture_dropdown_frame.pack(fill="both", expand=True)
+gesture1_frame = customtkinter.CTkFrame(customiseFrame)
+gesture1_frame.pack(fill="both")
 
-gesture1 = customtkinter.CTkLabel(gesture_dropdown_frame, text="Gesture 1")
-gesture1.pack(side="left", pady=10, padx=10)
+gesture1_label = customtkinter.CTkLabel(gesture1_frame, text="Gesture 1")
+gesture1_label.pack(side="left", pady=5, padx=80)
 
-gesture1_dropdown = customtkinter.CTkComboBox(gesture_dropdown_frame, values=getAppNames())
-gesture1_dropdown.pack(side="left", pady=30, padx=30)
-
-gesture_dropdown_frame.place(relx=0.5, rely=0.5, anchor="center")
+gesture1_dropdown = customtkinter.CTkComboBox(gesture1_frame, values=getAppNames())
+gesture1_dropdown.pack(side="left", pady=5, padx=30)
+gesture1_frame.pack_configure(anchor="center")
 
 # Gesture 2
+gesture2_frame = customtkinter.CTkFrame(customiseFrame)
+gesture2_frame.pack(fill="both")
 
-gesture2 = customtkinter.CTkLabel(gesture_dropdown_frame, text="Gesture 2")
-gesture2.pack(side="left", pady=10, padx=10)
+gesture2_label = customtkinter.CTkLabel(gesture2_frame, text="Gesture 2")
+gesture2_label.pack(side="left", pady=5, padx=80)
 
-gesture2_dropdown = customtkinter.CTkComboBox(gesture_dropdown_frame, values=getAppNames())
-gesture2_dropdown.pack(side="left", pady=30, padx=30)
+gesture2_dropdown = customtkinter.CTkComboBox(gesture2_frame, values=getAppNames())
+gesture2_dropdown.pack(side="left", pady=5, padx=30)
+gesture2_frame.pack_configure(anchor="center")
 
-gesture_dropdown_frame.place(relx=0.5, rely=0.5, anchor="center")
+# Gesture 3
+gesture3_frame = customtkinter.CTkFrame(customiseFrame)
+gesture3_frame.pack(fill="both")
+
+gesture3_label = customtkinter.CTkLabel(gesture3_frame, text="Gesture 3")
+gesture3_label.pack(side="left", pady=5, padx=80)
+
+gesture3_dropdown = customtkinter.CTkComboBox(gesture3_frame, values=getAppNames())
+gesture3_dropdown.pack(side="left", pady=5, padx=30)
+gesture3_frame.pack_configure(anchor="center")
+
+# Gesture 4
+gesture4_frame = customtkinter.CTkFrame(customiseFrame)
+gesture4_frame.pack(fill="both")
+
+gesture4_label = customtkinter.CTkLabel(gesture4_frame, text="Gesture 4")
+gesture4_label.pack(side="left", pady=5, padx=80)
+
+gesture4_dropdown = customtkinter.CTkComboBox(gesture4_frame, values=getAppNames())
+gesture4_dropdown.pack(side="left", pady=5, padx=30)
+gesture4_frame.pack_configure(anchor="center")
+
+# Gesture 5
+gesture5_frame = customtkinter.CTkFrame(customiseFrame)
+gesture5_frame.pack(fill="both")
+
+gesture5_label = customtkinter.CTkLabel(gesture5_frame, text="Gesture 5")
+gesture5_label.pack(side="left", pady=5, padx=80)
+
+gesture5_dropdown = customtkinter.CTkComboBox(gesture5_frame, values=getAppNames())
+gesture5_dropdown.pack(side="left", pady=5, padx=30)
+gesture5_frame.pack_configure(anchor="center")
+
+
+
 
 
 app.mainloop()
