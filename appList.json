@@ -1,0 +1,23 @@
+[
+    {
+        "displayName" : "Explorer",
+        "shellName" : ["explorer.exe", "microsoft.windows.camera:"]
+    },
+    {
+        "displayName" : "Calculator",
+        "shellName" : ["calc.exe"]
+    },
+    {
+        "displayName" : "Notepad",
+        "shellName" : ["notepad.exe"]
+    },
+    {
+        "displayName" : "Settings",
+        "shellName" : ["explorer.exe", "ms-settings:"]
+    },
+    {
+        "displayName" : "Photos",
+        "shellName" : ["explorer.exe", "microsoft.windows.photos:"]
+    }
+
+]

@@ -39,14 +39,14 @@ def backToMenuFrame():
 
 # Function to print "Hello, World!"
 def print_hello_world(varName):
-    print("Hello, World!", varName.get())
+    print("Hello, World!", varName)
 
 # First screen
 menuFrame.pack(fill="both", expand=True)
-button_1 = customtkinter.CTkButton(menuFrame, text="Launch program", command=lambda:goToExecuteProgram("new.py"))
-button_1.pack(pady=20)
-button_1 = customtkinter.CTkButton(menuFrame, text="Customise gestures", command=goToCustomise)
-button_1.pack(pady=20)
+launchButton = customtkinter.CTkButton(menuFrame, text="Launch program", command=lambda:goToExecuteProgram("new.py"))
+launchButton.pack(pady=20)
+customiseButton = customtkinter.CTkButton(menuFrame, text="Customise gestures", command=lambda:goToCustomise())
+customiseButton.pack(pady=20)
 
 # Second screen
 customiseDesc = customtkinter.CTkLabel(customiseFrame, text="Customise your gestures here")
@@ -60,7 +60,7 @@ customiseDesc2.pack(pady=5)
 gesture1 = customtkinter.CTkLabel(customiseFrame, text="Gesture 1")
 gesture1Text = customtkinter.StringVar(value="option 2")  # set initial value
 gesture1.pack(pady=20)
-gesture1_dropdown = customtkinter.CTkComboBox(customiseFrame, values=getAppNames(),command=print_hello_world(gesture1Text), variable=gesture1Text)
+gesture1_dropdown = customtkinter.CTkComboBox(customiseFrame, values=getAppNames(), variable=gesture1Text)
 gesture1_dropdown.pack(pady=20)
 
 
