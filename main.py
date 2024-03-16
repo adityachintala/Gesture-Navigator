@@ -17,7 +17,7 @@ def getAppNames():
     # return the list of app names
     f = open("appList.json", "r")
     data = json.load(f)
-    ls = []
+    ls = ["Select"]
     for i in data:
         ls.append(i["displayName"])
     return ls
@@ -48,18 +48,26 @@ def print_hello_world(varName):
 
 def saveGestures():
     userDefinedControls = {}
-    #      "userDefinedControls" : {
-    #     "index" : "Camera",
-    #     "index and middle" : "Mail",
-    #     "index, middle and ring" : "Calculator",
-    #     "index, middle, ring and little" : "Calendar",
-    #     "thumb" : "Phone"
-    #   }
-    userDefinedControls["index"] = gesture1_dropdown.get()
-    userDefinedControls["index and middle"] = gesture2_dropdown.get()
-    userDefinedControls["index, middle and ring"] = gesture3_dropdown.get()
-    userDefinedControls["index, middle, ring and little"] = gesture4_dropdown.get()
-    userDefinedControls["thumb"] = gesture5_dropdown.get()
+    userDefinedControls["index"] = gesture1_dropdown.get() if gesture1_dropdown.get() != "Select" else "null"
+    if gesture2_dropdown.get() != "Select":
+        userDefinedControls["index and middle"] = gesture2_dropdown.get()
+    else:
+        userDefinedControls["index and middle"] = "null"
+    
+    if gesture3_dropdown.get() != "Select":
+        userDefinedControls["index, middle and ring"] = gesture3_dropdown.get()
+    else:
+        userDefinedControls["index, middle and ring"] = "null"
+    
+    if gesture4_dropdown.get() != "Select":
+        userDefinedControls["index, middle, ring and little"] = gesture4_dropdown.get()
+    else:
+        userDefinedControls["index, middle, ring and little"] = "null"
+    
+    if gesture5_dropdown.get() != "Select":
+        userDefinedControls["thumb"] = gesture5_dropdown.get()
+    else:
+        userDefinedControls["thumb"] = "null"
     with open("userDefinedControls.json", "w") as f:
         json.dump(userDefinedControls, f)
 
