@@ -4,12 +4,13 @@ import json
 
 app = customtkinter.CTk()
 app.title("Gesture Navigator")
-app.geometry("500x300")
+app.geometry("500x400")
 app.iconbitmap("dark.ico")
 
 # Create two frames for the screens
 menuFrame = customtkinter.CTkFrame(app)
 customiseFrame = customtkinter.CTkFrame(app)
+
 
 def getAppNames():
     # read a file appList.json and fetch names
@@ -27,31 +28,62 @@ def goToCustomise():
     menuFrame.pack_forget()
     customiseFrame.pack(fill="both", expand=True)
 
+
 # Function to run python script
 def goToExecuteProgram(filePath):
     print("Starting Program")
     subprocess.run(["python", filePath])
+
 
 # Function to switch back to the first screen
 def backToMenuFrame():
     customiseFrame.pack_forget()
     menuFrame.pack(fill="both", expand=True)
 
+
 # Function to print "Hello, World!"
 def print_hello_world(varName):
     print("Hello, World!", varName)
 
+
+def saveGestures():
+    userDefinedControls = {}
+    #      "userDefinedControls" : {
+    #     "index" : "Camera",
+    #     "index and middle" : "Mail",
+    #     "index, middle and ring" : "Calculator",
+    #     "index, middle, ring and little" : "Calendar",
+    #     "thumb" : "Phone"
+    #   }
+    userDefinedControls["index"] = gesture1_dropdown.get()
+    userDefinedControls["index and middle"] = gesture2_dropdown.get()
+    userDefinedControls["index, middle and ring"] = gesture3_dropdown.get()
+    userDefinedControls["index, middle, ring and little"] = gesture4_dropdown.get()
+    userDefinedControls["thumb"] = gesture5_dropdown.get()
+    with open("userDefinedControls.json", "w") as f:
+        json.dump(userDefinedControls, f)
+
+
 # First screen
 menuFrame.pack(fill="both", expand=True)
-launchButton = customtkinter.CTkButton(menuFrame, text="Launch program", command=lambda:goToExecuteProgram("new.py"))
+launchButton = customtkinter.CTkButton(
+    menuFrame, text="Launch program", command=lambda: goToExecuteProgram("new.py")
+)
 launchButton.pack(pady=20)
-customiseButton = customtkinter.CTkButton(menuFrame, text="Customise gestures", command=lambda:goToCustomise())
+customiseButton = customtkinter.CTkButton(
+    menuFrame, text="Customise gestures", command=lambda: goToCustomise()
+)
 customiseButton.pack(pady=20)
 
 # Second screen
-customiseDesc = customtkinter.CTkLabel(customiseFrame, text="Customise your gestures here")
+customiseDesc = customtkinter.CTkLabel(
+    customiseFrame, text="Customise your gestures here"
+)
 customiseDesc.pack(pady=5)
-customiseDesc2 = customtkinter.CTkLabel(customiseFrame, text="You have five available gestures to customise which\ncan launch an app from the given list of apps.")
+customiseDesc2 = customtkinter.CTkLabel(
+    customiseFrame,
+    text="You have five available gestures to customise which\ncan launch an app from the given list of apps.",
+)
 customiseDesc2.pack(pady=5)
 
 # Five drop down lists should be there
@@ -112,7 +144,11 @@ gesture5_dropdown.pack(side="left", pady=5, padx=30)
 gesture5_frame.pack_configure(anchor="center")
 
 
-
+# button to save gestures
+button = customtkinter.CTkButton(
+    customiseFrame, text="Save", command=lambda: saveGestures()
+)
+button.pack_configure(anchor="center", pady=20)
 
 
 app.mainloop()
