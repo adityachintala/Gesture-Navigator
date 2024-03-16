@@ -1,19 +1,39 @@
-import customtkinter as tk
+import customtkinter
 
-tk.set_appearance_mode("Dark")
-tk.set_default_color_theme("blue")
-
-app = tk.CTk()
-app.geometry("800x600")
+app = customtkinter.CTk()
 app.title("Gesture Navigator")
-
-print(tk.get_appearance_mode())
+app.geometry("500x300")
 app.iconbitmap("dark.ico")
 
-# Create a label with initial transparency set to 0
-label = tk.CTkLabel(app, text="Welcome\nto\nGesture Navigator!", height=5, width=20, font=("Clarendon", 50), text_color="white")
-label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+# Create two frames for the screens
+menuFrame = customtkinter.CTkFrame(app)
+customiseFrame = customtkinter.CTkFrame(app)
 
-app.after(2000, lambda: label.configure(text="Hello World!"))
+# Function to switch to the second screen
+def goToCustomise():
+    menuFrame.pack_forget()
+    customiseFrame.pack(fill="both", expand=True)
+
+# Function to switch back to the first screen
+def backToMenuFrame():
+    customiseFrame.pack_forget()
+    menuFrame.pack(fill="both", expand=True)
+
+# Function to print "Hello, World!"
+def print_hello_world():
+    print("Hello, World!")
+
+# First screen
+menuFrame.pack(fill="both", expand=True)
+button_1 = customtkinter.CTkButton(menuFrame, text="Launch program", command=goToCustomise)
+button_1.pack(pady=20)
+button_1 = customtkinter.CTkButton(menuFrame, text="Customise gestures", command=goToCustomise)
+button_1.pack(pady=20)
+
+# Second screen
+button_2 = customtkinter.CTkButton(customiseFrame, text="Back to Screen 1", command=backToMenuFrame)
+button_2.pack(pady=20)
+button_3 = customtkinter.CTkButton(customiseFrame, text="Print Hello, World!", command=print_hello_world)
+button_3.pack(pady=20)
 
 app.mainloop()
