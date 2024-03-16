@@ -41,7 +41,11 @@ if customGestureJson == None:
             },
         }
     )
+
     customGestureJson = collection.find_one({"_id": unique_id})
+
+with open("userDefinedControls.json", "w") as f:
+    json.dump(customGestureJson, f)
 
 app = customtkinter.CTk()
 app.title("Gesture Navigator")
@@ -89,30 +93,17 @@ def print_hello_world(varName):
 
 def saveGestures():
     userDefinedControls = {}
-    userDefinedControls["index"] = (
-        gesture1_dropdown.get() if gesture1_dropdown.get() != "Select" else "null"
-    )
-    if gesture2_dropdown.get() != "Select":
-        userDefinedControls["index and middle"] = gesture2_dropdown.get()
-    else:
-        userDefinedControls["index and middle"] = "null"
+    userDefinedControls["index"] = gesture1_dropdown.get() if gesture1_dropdown.get() != "Select" else "null"
+    userDefinedControls["index and middle"] = gesture2_dropdown.get() if gesture2_dropdown.get() != "Select" else "null"
+    userDefinedControls["index, middle and ring"] = gesture3_dropdown.get() if gesture3_dropdown.get() != "Select" else "null"
+    userDefinedControls["index, middle, ring and little"] = gesture4_dropdown.get() if gesture4_dropdown.get() != "Select" else "null"
+    userDefinedControls["thumb"] = gesture5_dropdown.get() if gesture5_dropdown.get() != "Select" else "null"
 
-    if gesture3_dropdown.get() != "Select":
-        userDefinedControls["index, middle and ring"] = gesture3_dropdown.get()
-    else:
-        userDefinedControls["index, middle and ring"] = "null"
+    if customGestureJson is not None:
+        customGestureJson["userDefinedControls"] = userDefinedControls
 
-    if gesture4_dropdown.get() != "Select":
-        userDefinedControls["index, middle, ring and little"] = gesture4_dropdown.get()
-    else:
-        userDefinedControls["index, middle, ring and little"] = "null"
+        collection.update_one({"_id": unique_id}, {"$set": customGestureJson})
 
-    if gesture5_dropdown.get() != "Select":
-        userDefinedControls["thumb"] = gesture5_dropdown.get()
-    else:
-        userDefinedControls["thumb"] = "null"
-    with open("userDefinedControls.json", "w") as f:
-        json.dump(userDefinedControls, f)
 
 
 # First screen
