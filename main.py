@@ -1,6 +1,47 @@
 import customtkinter
 import subprocess
 import json
+import uuid
+import socket
+import pymongo
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+
+def get_unique_id():
+    mac = uuid.UUID(int=uuid.getnode()).hex[-12:]
+    hostname = socket.gethostname()
+    return f"{mac}-{hostname}"
+
+
+unique_id = get_unique_id()
+print(unique_id)
+
+client = pymongo.MongoClient(os.getenv("MONGODB.URI"))
+
+db = client["hci"]
+
+collection = db["user-config"]
+
+customGestureJson = collection.find_one({"_id": unique_id})
+
+if customGestureJson == None:
+    collection.insert_one(
+        {
+            "_id": unique_id,
+            "name": socket.gethostname(),
+            "userDefinedControls": {
+                "index": "null",
+                "index and middle": "null",
+                "index, middle and ring": "null",
+                "index, middle, ring and little": "null",
+                "thumb": "null",
+            },
+        }
+    )
+    customGestureJson = collection.find_one({"_id": unique_id})
 
 app = customtkinter.CTk()
 app.title("Gesture Navigator")
@@ -48,22 +89,24 @@ def print_hello_world(varName):
 
 def saveGestures():
     userDefinedControls = {}
-    userDefinedControls["index"] = gesture1_dropdown.get() if gesture1_dropdown.get() != "Select" else "null"
+    userDefinedControls["index"] = (
+        gesture1_dropdown.get() if gesture1_dropdown.get() != "Select" else "null"
+    )
     if gesture2_dropdown.get() != "Select":
         userDefinedControls["index and middle"] = gesture2_dropdown.get()
     else:
         userDefinedControls["index and middle"] = "null"
-    
+
     if gesture3_dropdown.get() != "Select":
         userDefinedControls["index, middle and ring"] = gesture3_dropdown.get()
     else:
         userDefinedControls["index, middle and ring"] = "null"
-    
+
     if gesture4_dropdown.get() != "Select":
         userDefinedControls["index, middle, ring and little"] = gesture4_dropdown.get()
     else:
         userDefinedControls["index, middle, ring and little"] = "null"
-    
+
     if gesture5_dropdown.get() != "Select":
         userDefinedControls["thumb"] = gesture5_dropdown.get()
     else:
