@@ -1,61 +1,108 @@
-import customtkinter
+import customtkinter as ctk
 from PIL import Image, ImageTk
 
-app = customtkinter.CTk()
-app.title("Screen Navigation Example")
+# Create the main window
+root = ctk.CTk()
+root.title("My GUI")
+root.after(0, lambda: root.focus_force())
 
-# Create two frames for the screens
-frame_1 = customtkinter.CTkFrame(app)
-frame_2 = customtkinter.CTkFrame(app)
+class GestureAnimation:
+    def __init__(self, root, anchor, gif_path):
+        self.root = root
+        self.gif_path = gif_path
+        self.anchor = anchor
 
-# Load the GIF
-gif_file = "another_gif.gif"  # Replace with the path to your GIF file
-gif = Image.open(gif_file)
-frames = []
+        # Load the GIF
+        self.gif = Image.open(gif_path)
+        self.frames = []
+        self.load_frames()
+        self.runFlag = True
 
-try:
-    for i in range(gif.n_frames):
-        gif.seek(i)
-        frames.append(ImageTk.PhotoImage(gif))
-except Exception as e:
-    print(f"Error loading GIF: {e}")
+        # Create a label to display the GIF
+        self.label = ctk.CTkLabel(root, text="")
+        self.label.pack(side=anchor, padx=20)
 
-# Function to switch to the second screen
-def switch_to_screen_2():
-    frame_1.pack_forget()
-    frame_2.pack(fill="both", expand=True)
+        # Display the GIF
+        self.display_frames()
 
-# Function to switch back to the first screen
-def switch_to_screen_1():
-    frame_2.pack_forget()
-    frame_1.pack(fill="both", expand=True)
+    def update_gif(self, gif_path):
+        # Remove old frames
+        self.runFlag = False
+        self.frames.clear()
 
-# Function to print "Hello, World!"
-def print_hello_world():
-    print("Hello, World!")
+        # Load the new GIF
+        self.gif = Image.open(gif_path)
+        self.load_frames()
+        self.runFlag = True
+        self.display_frames()
 
-# First screen
-frame_1.pack(fill="both", expand=True)
-button_1 = customtkinter.CTkButton(frame_1, text="Go to Screen 2", command=switch_to_screen_2)
-button_1.pack(pady=20)
+    def load_frames(self):
+        try:
+            while True:
+                self.frames.append(ImageTk.PhotoImage(self.gif.copy()))
+                self.gif.seek(len(self.frames))
+                print("Loaded frame")
+        except EOFError:
+            pass
 
-# Second screen
-frame_2.pack(fill="both", expand=True)
-button_2 = customtkinter.CTkButton(frame_2, text="Back to Screen 1", command=switch_to_screen_1)
-button_2.pack(pady=20)
-button_3 = customtkinter.CTkButton(frame_2, text="Print Hello, World!", command=print_hello_world)
-button_3.pack(pady=20)
+    def display_frames(self):
+        try:
+            def update_frame(idx):
+                frame = self.frames[idx]
+                self.label.configure(image=frame)
+                if self.runFlag:
+                    self.root.after(30, update_frame, (idx + 1) % len(self.frames))
 
-# Add the GIF to the second screen
-gif_label = customtkinter.CTkLabel(frame_2)
-gif_label.pack(pady=20)
+            update_frame(0)
+        except Exception as e:
+            pass
 
-def update_gif(idx):
-    frame = frames[idx]
-    idx += 1
-    gif_label.configure(image=frame)
-    gif_label.after(50, update_gif, idx % len(frames))
+# Define the paths for the GIFs
+gif_paths = {
+    "Option 1": {"left": "1.gif", "right": "2.gif"},
+    "Option 2": {"left": "3.gif", "right": "4.gif"},
+    "Option 3": {"left": "5.gif", "right": "6.gif"}
+}
 
-update_gif(0)
+# Create a dropdown list
+options = list(gif_paths.keys())
+selected_option = ctk.StringVar()
+dropdown = ctk.CTkComboBox(root, values=options, variable=selected_option)
+dropdown.set(options[0])
+dropdown.pack(pady=20)
 
-app.mainloop()
+# Create a frame for the GIFs
+gif_frame = ctk.CTkFrame(root)
+gif_frame.pack(pady=10)
+
+# Create labels for the GIFs
+left_gif_label = GestureAnimation(gif_frame, "left", "1.gif")
+right_gif_label = GestureAnimation(gif_frame, "right", "2.gif")
+
+# Create a frame for the heading and description
+description_frame = ctk.CTkFrame(root)
+description_frame.pack(pady=20)
+
+# Create the heading
+heading = ctk.CTkLabel(description_frame, text="Description", font=("Arial", 16, "bold"))
+heading.pack(pady=10)
+
+# Create the description text
+description_text = "This is a small description."
+description_label = ctk.CTkLabel(description_frame, text=description_text, wraplength=600)
+description_label.pack()
+
+# Function to update the GIFs based on the selected option
+def update_gifs(*_):
+    option = selected_option.get()
+    left_gif_path = gif_paths[option]["left"]
+    right_gif_path = gif_paths[option]["right"]
+
+    left_gif_label.update_gif(left_gif_path)
+    right_gif_label.update_gif(right_gif_path)
+
+# Bind the update_gifs function to the dropdown selection
+selected_option.trace_add("write", update_gifs)
+
+# Run the main loop
+root.mainloop()
