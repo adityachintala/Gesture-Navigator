@@ -1,1 +1,0 @@
-left_gif_label
