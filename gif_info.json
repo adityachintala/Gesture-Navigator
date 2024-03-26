@@ -1,0 +1,142 @@
+{
+    "Volume Control": {
+        "left": "1.gif",
+        "right": "2.gif",
+        "description": "You can control volume by selecting the mode on the left and then pinching or expanding your thumb and index."
+    },
+    "Previous Track": {
+        "left": "3.gif",
+        "right": "4.gif",
+        "description": "You can go to the previous track by selecting the mode on the left and then opening your thumb."
+    },
+    "Next Track": {
+        "left": "5.gif",
+        "right": "6.gif",
+        "description": "You can go to the next track by selecting the mode on the left and then opening your little finger."
+    },
+    "Play/Pause": {
+        "left": "7.gif",
+        "right": "8.gif",
+        "description": "You can play or pause the music by selecting the mode on the left and then opening your hand."
+    },
+    "Mute": {
+        "left": "9.gif",
+        "right": "10.gif",
+        "description": "You can mute the volume by selecting the mode on the left and then opening your index, middle and ring fingers."
+    },
+    "Control Brightness": {
+        "left": "11.gif",
+        "right": "12.gif",
+        "description": "You can control the brightness by selecting the mode on the left and then pinching or expanding your thumb and index."
+    },
+    "Switch Window Forward": {
+        "left": "13.gif",
+        "right": "14.gif",
+        "description": "You can switch between windows by selecting the mode on the left and then opening your little finger."
+    },
+    "Switch Window Backward": {
+        "left": "15.gif",
+        "right": "16.gif",
+        "description": "You can switch between windows by selecting the mode on the left and then opening your thumb."
+    },
+    "Minimalize All Windows": {
+        "left": "17.gif",
+        "right": "18.gif",
+        "description": "You can minimalize all windows by selecting the mode on the left and then opening your hand."
+    },
+    "Close Window": {
+        "left": "19.gif",
+        "right": "20.gif",
+        "description": "You can close the current window by selecting the mode on the left and then opening your ring and little fingers."
+    },
+    "Switch between windows of the same app": {
+        "left": "21.gif",
+        "right": "22.gif",
+        "description": "You can switch between windows of the same app by selecting the mode on the left and then opening your index and little fingers."
+    },
+    "Close one window of the application": {
+        "left": "23.gif",
+        "right": "24.gif",
+        "description": "You can close one window of the application by selecting the mode on the left  and then opening your index, middle, ring and little fingers."
+    },
+    "Switch to the previous tab in browser": {
+        "left": "25.gif",
+        "right": "26.gif",
+        "description": "You can switch to the previous tab in browser by selecting the mode on the left and then opening your thumb finger."
+    },
+    "Switch to the next tab in browser": {
+        "left": "27.gif",
+        "right": "28.gif",
+        "description": "You can switch to the next tab in browser by selecting the mode on the left and then opening your little finger."
+    },
+    "Close the current tab in browser": {
+        "left": "29.gif",
+        "right": "30.gif",
+        "description": "You can close the current tab in browser by selecting the mode on the left and then opening your hand."
+    },
+    "Open a new tab in browser": {
+        "left": "31.gif",
+        "right": "32.gif",
+        "description": "You can open a new tab in browser by selecting the mode on the left and then opening your ring and little fingers."
+    },
+    "Reopen the last closed tab in browser": {
+        "left": "33.gif",
+        "right": "34.gif",
+        "description": "You can reopen the last closed tab in browser by selecting the mode on the left and then opening your index and little fingers."
+    },
+    "Open New Window": {
+        "left": "35.gif",
+        "right": "36.gif",
+        "description": "You can open a new window by selecting the mode on the left and then opening your index, middle, ring and little fingers."
+    },
+    "Control Mouse": {
+        "left": "37.gif",
+        "right": "38.gif",
+        "description": "You can control the mouse by selecting the mode on the left and then use your index and middle fingers to move the cursor."
+    },
+    "Scroll Up": {
+        "left": "39.gif",
+        "right": "40.gif",
+        "description": "You can scroll up by selecting the mode on the left and then open all your fingers except the thumb."
+    },
+    "Scroll Down": {
+        "left": "41.gif",
+        "right": "42.gif",
+        "description": "You can scroll down by selecting the mode on the left and then open all your fingers."
+    },
+    "Left Click": {
+        "left": "43.gif",
+        "right": "44.gif",
+        "description": "You can left click by selecting the mode on the left and then open your thumb and index fingers."
+    },
+    "Right Click": {
+        "left": "45.gif",
+        "right": "46.gif",
+        "description": "You can right click by selecting the mode on the left and then open your thumb and middle fingers."
+    },
+    "Open User Defined App 1": {
+        "left": "47.gif",
+        "right": "48.gif",
+        "description": "You can open user defined app 1 by selecting the mode on the left and then open your index finger."
+    },
+    "Open User Defined App 2": {
+        "left": "49.gif",
+        "right": "50.gif",
+        "description": "You can open user defined app 2 by selecting the mode on the left and then open your index and middle fingers."
+    },
+    "Open User Defined App 3": {
+        "left": "51.gif",
+        "right": "52.gif",
+        "description": "You can open user defined app 3 by selecting the mode on the left and then open your index, middle and ring fingers."
+    },
+    "Open User Defined App 4": {
+        "left": "53.gif",
+        "right": "54.gif",
+        "description": "You can open user defined app 4 by selecting the mode on the left and then open your index, middle, ring and little fingers."
+    },
+    "Open User Defined App 5": {
+        "left": "55.gif",
+        "right": "56.gif",
+        "description": "You can open user defined app 5 by selecting the mode on the left and then open your thumb finger."
+    }
+}

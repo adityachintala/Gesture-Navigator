@@ -3,6 +3,7 @@ import subprocess
 import json
 import uuid
 import socket
+from numpy import pad
 import pymongo
 from dotenv import load_dotenv
 import os
@@ -22,7 +23,7 @@ class GestureAnimation:
 
         # Create a label to display the GIF
         self.label = customtkinter.CTkLabel(root, text="")
-        self.label.pack(side=anchor, padx=20)
+        self.label.pack(side=anchor, padx=20, pady=20)
 
         # Display the GIF
         self.display_frames()
@@ -80,6 +81,9 @@ customGestureJson = collection.find_one({"_id": unique_id})
 f = open("appList.json", "r")
 data = json.load(f)
 
+f = open("gif_info.json", "r")
+gif_info = json.load(f)
+
 if customGestureJson == None:
     collection.insert_one(
         {
@@ -102,7 +106,7 @@ if customGestureJson == None:
 
 app = customtkinter.CTk()
 app.title("Gesture Navigator")
-app.geometry("500x400")
+app.geometry("600x500")
 app.iconbitmap("dark.ico")
 
 # Create two frames for the screens
@@ -138,6 +142,7 @@ def launchGestureControl():
 # Function to switch back to the first screen
 def backToMenuFrame():
     customiseFrame.pack_forget()
+    tutorialFrame.pack_forget()
     menuFrame.pack(fill="both", expand=True)
 
 # Function to print "Hello, World!"
@@ -181,6 +186,7 @@ def saveGestures(data):
     with open("./script/modules/user_defined_data.json", "w") as f:
         json.dump(customGestureJson, f)
 
+############################################################################################################
 # First screen
 menuFrame.pack(fill="both", expand=True)
 launchButton = customtkinter.CTkButton(
@@ -198,6 +204,7 @@ tutorialButton = customtkinter.CTkButton(
 )
 tutorialButton.pack(pady=60)
 
+############################################################################################################
 # Second screen
 customiseDesc = customtkinter.CTkLabel(
     customiseFrame, text="Customise your gestures here"
@@ -292,20 +299,12 @@ saveButton = customtkinter.CTkButton(
     customiseFrame, text="Save", command=lambda: saveGestures(data)
 )
 saveButton.pack_configure(anchor="center", pady=20)
-backToMainMenu = customtkinter.CTkButton(
-    customiseFrame, text="Back", command=lambda: backToMenuFrame()
-)
+backToMainMenu = customtkinter.CTkButton(customiseFrame, text="Back", command=lambda: backToMenuFrame())
 backToMainMenu.pack_configure(anchor="center", pady=20)
 
+############################################################################################################
 # Third Screen
 # Third screen is for the user to view tutorial
-
-# Define the paths for the GIFs
-gif_info = {
-    "Option 1": {"left": "1.gif", "right": "2.gif", "description": "This is a description for option 1."},
-    "Option 2": {"left": "3.gif", "right": "4.gif", "description": "This is a description for option 2."},
-    "Option 3": {"left": "5.gif", "right": "6.gif", "description": "This is a description for option 3."}
-}
 
 # Create a dropdown list
 options = list(gif_info.keys())
@@ -318,12 +317,19 @@ dropdown.pack(pady=20)
 gif_frame = customtkinter.CTkFrame(tutorialFrame)
 gif_frame.pack(pady=10)
 
+# Specify the hands for the GIFs, these should be displayed side by side above the GIFs
+left_hand = customtkinter.CTkLabel(gif_frame, text="Left Hand")
+left_hand.pack(side="left", padx=20)
+
+right_hand = customtkinter.CTkLabel(gif_frame, text="Right Hand")
+right_hand.pack(side="right", padx=20)
+
 # Create labels for the GIFs
 left_gif_label = GestureAnimation(gif_frame, "left", "1.gif")
 right_gif_label = GestureAnimation(gif_frame, "right", "2.gif")
 
 # Create a frame for the heading and description
-description_frame = customtkinter.CTkFrame(tutorialFrame)
+description_frame = customtkinter.CTkFrame(tutorialFrame,width=400,height=200,corner_radius=25, border_width=5)
 description_frame.pack(pady=20)
 
 # Create the heading
@@ -331,18 +337,18 @@ heading = customtkinter.CTkLabel(description_frame, text="Description", font=("A
 heading.pack(pady=10)
 
 # Create the description text
-description_label = customtkinter.CTkLabel(description_frame, text=gif_info["Option 1"]["description"], wraplength=600)
-description_label.pack()
+description_label = customtkinter.CTkLabel(description_frame, text=gif_info[options[0]]["description"], wraplength=500)
+description_label.pack(pady=10, padx=20)
 
 # Function to update the GIFs based on the selected option
 def update_gifs(*_):
     option = selected_option.get()
     left_gif_path = gif_info[option]["left"]
     right_gif_path = gif_info[option]["right"]
+    description_label.configure(text=gif_info[option]["description"])
 
     left_gif_label.update_gif(left_gif_path)
     right_gif_label.update_gif(right_gif_path)
-    description_label.configure(text=gif_info[option]["description"])
 
 # Bind the update_gifs function to the dropdown selection
 selected_option.trace_add("write", update_gifs)
