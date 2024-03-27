@@ -43,6 +43,8 @@ def display_gif(root, gif_paths):
 
 if __name__ == "__main__":
     root = tk.Tk()
-    gif_paths = ["1.gif", "2.gif"]  # List of paths to your GIFs
+    gif_paths = ["animations\\1.gif", "animations\\4.gif"]  # List of paths to your GIFs
     display_gif(root, gif_paths)
     root.mainloop()
+
+# animations\1.gif
